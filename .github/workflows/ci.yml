@@ -51,6 +51,6 @@ jobs:
         with:
           context: .
           push: ${{ github.ref == 'refs/heads/main' }}
-          tags: ghcr.io/${{ github.repository }}:latest,ghcr.io/${{ github.repository }}:${{ github.sha }}
+          tags: ghcr.io/gappylul/watchpost:latest,ghcr.io/gappylul/watchpost:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
