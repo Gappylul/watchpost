@@ -1,0 +1,10 @@
+services:
+  - name: "google"
+    check: http
+    target: "https://google.com"
+    interval: "5s"
+
+  - name: "cloudflare-dns"
+    check: tcp
+    target: "1.1.1.1:53"
+    interval: "10s"

@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package watchpost;
+
+option go_package = "github.com/gappylul/watchpost/proto";
+
+message Service {
+  string name       = 1;
+  string status     = 2;
+  int64  latency_ms = 3;
+  string error      = 4;
+  string checked_at = 5;
+}
+
+message GetServicesRequest {}
+
+message GetServicesResponse {
+  repeated Service services = 1;
+}
+
+message WatchStatusRequest {}
+
+service Watchpost {
+  rpc GetServices(GetServicesRequest) returns (GetServicesResponse);
+  rpc WatchStatus(WatchStatusRequest) returns (stream Service);
+}

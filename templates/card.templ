@@ -1,0 +1,42 @@
+package templates
+
+import (
+    "fmt"
+    "github.com/gappylul/watchpost/internal/hub"
+)
+
+templ Card(s hub.Status) {
+    <div
+        id={ fmt.Sprintf("service-%s", s.Service) }
+        hx-swap-oob="true"
+        style={ cardStyle(s) }
+    >
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span>{ s.Service }</span>
+            <span>{ badge(s.Status) }</span>
+        </div>
+        <div style="margin-top:0.5rem; color:#888; font-size:0.8rem;">
+            { fmt.Sprintf("%dms", s.LatencyMs) }
+            if s.Error != "" {
+                <div style="color:#ff6b6b; margin-top:0.25rem;">{ s.Error }</div>
+            }
+        </div>
+    </div>
+}
+
+func cardStyle(s hub.Status) string {
+    border := "#2a2a2a"
+    if s.Status == "up" {
+        border = "#00ff88"
+    } else {
+        border = "#ff4444"
+    }
+    return fmt.Sprintf("background:#1a1a1a; border:1px solid %s; border-radius:8px; padding:1rem;", border)
+}
+
+func badge(status string) string {
+    if status == "up" {
+        return "● up"
+    }
+    return "● down"
+}
